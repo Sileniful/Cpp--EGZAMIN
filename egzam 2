@@ -1,0 +1,110 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+class silnik
+{
+protected:
+int typ;
+public:
+silnik(int n):typ(n)
+{
+cout<<"\tkonstuktor silnika(sk³adnik samochodu)\n";
+}
+
+~silnik()
+{
+cout<<"\tdestruktor silnika(sk³adnik samochodu)\n";
+}
+};
+
+class klimatyzacja
+{
+double temperat;
+public:
+int nic;
+klimatyzacja(double t):temperat (t)
+{
+cout<<"\t\tkonstruktor klimatyzacji(sk³adnik mercedesa)\n";
+}
+
+~klimatyzacja()
+{
+cout<<"\t\tdestruktor klimatyzacji(sk³adnik mercedesa)\n";
+}
+};
+
+class sr_transportu
+{
+protected:
+double	poz_x,
+poz_y;
+public:
+sr_transportu()
+{
+cout<<" konstruktor sr_tansportu\n";
+}
+
+~sr_transportu()
+{
+cout<<" destruktor sr_tansportu\n";
+}
+};
+
+class samochod:public sr_transportu
+{
+protected:
+int aa;
+silnik jego_silnik;
+public:
+samochod (int typ_silnika):sr_transportu(),jego_silnik(typ_silnika)
+{
+cout<<"\tkonstruktor samochodu\n";
+}
+
+~samochod()
+{
+cout<<"\tdestruktor samochodu\n";
+}
+};
+
+class mercedes:public samochod
+{
+protected:
+double xxx;
+klimatyzacja casablanca;
+public:
+mercedes(double x, int typ_motoru,double klim):xxx(x),samochod(typ_motoru),casablanca(klim)
+{
+cout<<"\t\tkonstruktor mercedesa\n";
+}
+
+~mercedes()
+{
+cout<<"\t\tdestruktor marcedesa\n";
+}
+};
+//********************************************
+
+int main()
+{
+{
+
+cout<<"kreacja obiektu klasy samochod\n";
+samochod czarny(500);
+cout <<"\nobiekt czarny samochod istnieje\n teraz bedzie likwidowany!\n\n";
+}
+
+cout<< "obiekt samochod zlikwidowany\n\n";
+
+{
+cout<<"kreacja obiektu klasy mercedes\n";
+mercedes popielaty(6.5,1200,22.5);
+cout <<"obiekt mercedes istnieje\n teraz bedzie likwidowany!\n";
+}
+cout<< "obiekt mercedes zlikwidowany\n";
+
+
+
+getch();
+}
