@@ -1,0 +1,167 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////ZESTAW 1 EGZAMIN CPP //////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <iostream>
+
+using namespace std;
+void zad1();
+void zad2();
+void zad3();
+class wektor
+{
+private:
+    float *x,*y,*z;
+public:
+
+    wektor(float x_podane=0,float y_podane=0,float z_podane=0)
+    {
+        x = new float;
+        y = new float;
+        z = new float;
+        *x = x_podane;
+        *y = y_podane;
+        *z = z_podane;
+    }
+    wektor (const wektor & oryginal)
+    {
+        x = new float;
+        y = new float;
+        z = new float;
+        *x = *oryginal.x;
+        *y = *oryginal.y;
+        *z = *oryginal.z;
+    }
+
+    void wypisz()
+    {
+        cout << " X "<< *x << " Y " << *y <<" Z " << *z << endl;
+    }
+
+    wektor skladoweDodawanie(const wektor & podany)
+    {
+
+        wektor result(*this); // tworze kopie aktualnego wektora
+
+
+        *result.x = *result.x + *podany.x;
+        *result.y = *result.y + *podany.y;
+        *result.z = *result.z + *podany.z;
+
+        return result;
+
+    }
+
+    float publicznazmienna;
+    int* fun(int a)
+    {
+        int *wsk ;
+        wsk = &a;
+        return wsk;
+    }
+
+    ~wektor()
+    {
+        cout << "DELETE" << endl;
+        delete x;
+        delete y;
+        delete z;
+    }
+};
+
+int * funpoza (int a)
+{
+    int *wsk ;
+    wsk = &a;
+    return wsk;
+}
+
+int main()
+{
+
+    zad1();
+    zad2();
+    zad3();
+    return 0;
+}
+
+void zad1()
+{
+    /* 1. Napisz nastêpuj¹ce deklaracje:
+wskaŸnik do elementu klasy wektor (pkt 2) typu float
+siedmioelementow¹ tablicê wskaŸników do funkcji int* fun(int)
+zainicjalizuj wskaŸniki*/
+
+//wskaznik do elementu klasy wektor typu float
+float wektor::*wskaznik;
+wskaznik = &wektor::publicznazmienna;
+
+//siedmioelementowa tablica wskaznikow do funkcji int* fun(int)
+//nie wiadomo do ktorego to ma byc , czy do funkcji w klasie , czy po za..
+int* (wektor::*wf[7]) (int);
+for (int i=0;i<7;i++)
+{
+   wf[i] = & wektor::fun;
+}
+
+int* (*funkcja[7]) (int);
+for (int i=0;i<7;i++)
+{
+   funkcja[i] = & funpoza;
+}
+
+
+}
+
+void zad2()
+{
+/*2. Niech będzie dana klasa wektor zdefiniowana:
+class wektor {
+private:
+float *x, *y, *z;
+public:
+wektor ....; }
+Zadeklarować i zdefiniować:
+Konstruktor inicjujący wartości x, y, z,
+Konstruktor kopjujący
+Funkcje składową dodająca dwa wektory w następujący (x1+x2, y1+y2, z1+z2) */
+
+//zadanie zostalo zrobione wyzej
+
+wektor w1 (1,2,3);
+wektor w2 = w1;
+w1.wypisz();
+
+wektor w3(1,1,1);
+w3 = w2.skladoweDodawanie(w3);
+w3.wypisz();
+}
+
+class X
+{
+int i;
+public:
+static int j;
+static int f(int j);
+};
+
+
+int X::f(int j ) {return 2*j;}
+void zad3()
+{
+/* 3. class X
+{
+int i;
+public:
+static int j;
+static f(int j);
+};
+
+Która z definicji funkcji f jest poprawna i dlaczego:
+a. X::f(int j ) {return 2*j*i;} // poprawne bo odwolywanie sie do funkcji w klasie odbywa sie poprzez <nazwa klasy>::funkcja itp ,ale jest zmienna private int i
+b. f(int j ) {return 2*i;}
+c. f(int j ) {return 2*j;}
+d. X::f(int j ) {return 2*j;} // poprawne
+*/
+
+
+}
