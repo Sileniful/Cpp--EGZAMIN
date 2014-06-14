@@ -1,0 +1,108 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////ZESTAW 5 EGZAMIN CPP //////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+void zad1();
+void zad2();
+void zad3();
+
+int main()
+{
+
+    zad1();
+    zad2();
+    zad3();
+    return 0;
+}
+
+
+void zad1()
+{
+/*
+1.Które z poni¿szych prze³adowañ funkcji s¹ niepoprawne i dlaczego:
+a) void fun (int);
+int fun (int);
+int fun (int, int);
+b) int fun (usigned int)
+int fun (int);
+int fun (int, char);
+c) int fun (int a, int b=0);
+int fun (int); //nie poprawne bo ta funkcja nigdy sie nie wywolala bo wczesniej jest domniemana wartosc
+d) void fun (int tab[]);
+void fun (int *wsk);
+
+
+*/
+
+ }
+class l_zes {
+int re, im ;
+public:
+    l_zes(int a=0,int b=0):re(a),im(b) {}
+
+    //od tej pory mo¿emy obiekt klasy l_zes wys³ac do wszystkich funkcji, które jako argument spodziewaj¹ siê typu int.
+     operator int()
+    {
+        return re;
+    }
+};
+
+void Fun1(int i)
+{
+
+}
+void Fun2(l_zes z)
+{
+
+}
+
+void zad2()
+{
+/* Niech bêdzie dana klasa wektor zdefiniowana:
+class l_zes {
+int re, im ;
+public:
+wektor ... }
+Zdefiniowaæ konstruktory lub /i funkcje konwertuj¹ce, dla których poni¿sze wywo³ania bêd¹ prawid³owe
+int a=3; l_zes z1;
+Fun1 (int i); Fun1 (z1);
+Fun2 (l_zes z); Fun2 (a); */
+
+
+int a=3; l_zes z1;
+Fun1(z1);
+Fun2(a);
+}
+
+class A{public: ~A() {cout <<"Destruktor A";}};
+class B{public:~B() {cout <<"Destruktor B";}};
+class C{public:~C() {cout <<"Destruktor C";}};
+class X:public A, public B{public:~X() {cout <<"Destruktor X";}};
+class Y:public X, public C{public:~Y() {cout <<"Destruktor Y";}};
+
+void zad3()
+{
+/* 3. Dana jest klasa
+class A{};
+class B{};
+class C{};
+class X:public A, public B{};
+class Y:public X, public C{};
+Jaka jest kolejnoœæ aktywowania destruktorów podczas usuwania obiektu klasy Y;*/
+
+
+/*
+destruktor Y
+destruktor C
+destruktor X
+destruktor B
+desutruktor A
+
+
+*/
+Y obj;
+
+}
