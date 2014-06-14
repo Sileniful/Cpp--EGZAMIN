@@ -1,0 +1,111 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////ZESTAW 1 EGZAMIN CPP //////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+void zad1();
+void zad2();
+void zad3();
+
+int main()
+{
+
+    zad1();
+    zad2();
+    zad3();
+    return 0;
+}
+char *fun (int,char)
+{
+    char *result;
+    return result;
+}
+
+void zad1()
+{
+/*tablicę pięciu wskaźników typu int;
+wskaźnik do funkcji char * fun (int, char);
+
+zainicjalizuj wskaźniki */
+
+int * tab[5];
+for (int i=0;i<5;i++)
+{
+    tab[i]=new int;
+    tab[i] = &i;
+}
+
+char* (*wsk) (int,char);
+wsk = &fun;
+
+}
+
+class string2
+{
+char *wsk;
+int roz ; // długość napisu
+
+public:
+    string2(char t[]):roz(strlen(t)),wsk(new char[roz+1])
+    {
+        strcpy(wsk,t);
+        osoba(wsk);
+    }
+    string2 (const string2 & org):roz(org.roz),wsk(new char[roz+1])
+    {
+        strcpy(wsk,org.wsk);
+        osoba(wsk);
+    }
+void osoba(char n[]);
+};
+
+void zad2()
+{
+/*
+2. Dana jest klasa
+class string
+{
+char *wsk;
+int roz ; // długość napisu
+
+public:
+osoba(char n[]);
+};
+
+Zdefiniuj powyższy konstruktor oraz dodatkowo konstruktor kopiujący wykorzystując listę inicjalizacyjną
+
+*/
+}
+
+
+void zad3()
+{
+/*
+3. Omów na przykładach dziedziczenie:
+prywatne;
+publiczne;
+zastrzeżone (protected)
+wybiórcze;*/
+
+/*
+Przy dziedziczeniu prywatnym np:
+class A {};
+class B:public A {}:
+
+klasa B nie bedzie miala dostepu do skladowych (zmiennych lub funkcji)prywatnych klasy A
+
+Przy dziedziczeniu publcznym
+klasa B bedzie miala dostep do wszytkich elementow klasy A , jednak nie zostanie zachowana enkapsulacja
+
+przy protected:
+klasa B bedzie miala dostep do wszystkiego z A i bedzie zachowana enkapsulacja
+
+przy dziedziczeniu wybiórczym klasa B bedzie miala tylko dostep do pewnych skladowych ktore zostana podane
+
+
+*/
+
+
+}
