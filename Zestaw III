@@ -1,0 +1,115 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////ZESTAW 3 EGZAMIN CPP //////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+void zad1();
+void zad2();
+void zad3();
+
+int main()
+{
+
+    zad1();
+    zad2();
+    zad3();
+    return 0;
+}
+
+
+void zad1()
+{
+/*
+1. Napisz następujące deklaracje:
+wskaźnik do wskaźnika do znaku,
+stały wskaźnik do stałej całkowitej,
+
+zainicjalizuj wskaźniki
+
+
+*/
+char znak = 'a';
+char* wsk1 = &znak;
+char **wsk2 = &wsk1;
+
+const int zmienna = 2;
+const int *wskc = &zmienna;
+cout << *wskc;
+};
+
+class string2
+{
+char *wsk;
+int roz ; // długość napisu
+
+public:
+
+    string2(const string2 &org):roz(org.roz),wsk(new char[roz])
+    {
+        strcpy(wsk,org.wsk);
+    }
+    string2 & operator=(const string2 &org)
+    {
+        if (roz!=org.roz)
+        {
+            delete []wsk;
+            roz = org.roz;
+            wsk = new char[org.roz+1];
+        }
+        strcpy(wsk,org.wsk);
+
+    }
+
+    ~string2()
+    {
+        delete [] wsk;
+    }
+};
+
+void zad2()
+{
+/*2. Dana jest klasa
+class string
+{
+char *wsk;
+int roz ; // długość napisu
+
+public:
+
+// Konstruktor i operator
+};
+
+zdefinuj dla tej klasy konstruktor kopiujący, destruktor oraz operator przypisania */
+// zrobione wyzej
+
+}
+
+
+void zad3()
+{
+//3. Czego się nie dziedziczy i dlaczego ?
+
+/*ODP:
+
+Są trzy rzeczy, które nie są dziedziczone.
+1) konstruktor
+2) destruktor
+3) operator przypisania ( operator =)
+
+Bardzo prosto zrozumieć dlaczego nie dziedziczymy konstruktora.
+Klasa pochodna to obiekty klasy podstawowej plus jeszcze jakies dodatkowe obiekty (funkcje).
+O tych dodatkowych obiektach konstruktor klasy podstawowej nie wie, zatem gdyby został odziedziczony
+to zainicjalizowane zostałyby tylkoobiekty klasy podstawowej.
+Kostruktor dla klasy pochodnej należy zdefiniować sobie samemu.
+
+Destruktora nie dziedziczymy z tego samego powodu co i konstruktora. Nie wie on o tych dodatkowych składnikach klasy pochodnej
+, wiec nie może po nich "posprzątac".
+Destruktor klasy pochodnej musimy zdefiniować sobie sami!
+
+Operatora przypisania nie dziedziczymy, ponieważ jego celem jest przypisanie wartości składnikom klasy podstawowej,
+a o dodatkowych obiektach klasy pochodnej nic nie wie. */
+
+
+}
