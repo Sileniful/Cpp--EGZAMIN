@@ -1,0 +1,117 @@
+#include <iostream>
+
+using namespace std;
+
+int dodawanie(int a, int b);
+int mnozenie(int a, int b);
+
+typedef int(*wskaznikNaFunkcje_Oblicz)(int, int);
+
+int oblicz(int a, int b, wskaznikNaFunkcje_Oblicz wykonajWskaznik);
+int obliczBezDefinicji(int a, int b, int(*wykonajWskaznik)(int, int));
+
+int main()
+{
+    //////////////////////////////////// wskazniki ////////////////////////////////////
+    /*int zmienna = 2;
+    int *wskaznik;
+    wskaznik = &zmienna;
+    cout<<*wskaznik<<"\n";
+    cout<<wskaznik<<"\n";
+    cout<<zmienna<<"\n";
+    cout<<&zmienna<<"\n\n";
+    zmienna = 3;
+    cout<<*wskaznik<<"\n";
+    cout<<wskaznik<<"\n";
+    cout<<zmienna<<"\n";
+    cout<<&zmienna<<"\n\n";
+    *wskaznik = 5;
+    cout<<*wskaznik<<"\n";
+    cout<<wskaznik<<"\n";
+    cout<<zmienna<<"\n";
+    cout<<&zmienna<<"\n\n";*/
+
+    //////////////////////////////////// wskaznik staly ////////////////////////////////////
+    /*int zmienna1 = 2, zmienna2 = 5;
+    int * const wskaznik = &zmienna1; //zainicjalizować można tylko tutaj!
+    cout<<*wskaznik<<"\n";
+    cout<<wskaznik<<"\n";
+    cout<<zmienna1<<"\n";
+    cout<<&zmienna1<<"\n";
+    cout<<zmienna2<<"\n";
+    cout<<&zmienna2<<"\n\n";
+    //wskaznik = &zmienna2; -> nie przejdzie
+    //wskaznik = &zmienna1; -> powtórne ustawienie na ten sam obiekt nie zadziała
+    zmienna1 = 100;
+    cout<<*wskaznik<<"\n";
+    cout<<wskaznik<<"\n";
+    cout<<zmienna1<<"\n";
+    cout<<&zmienna1<<"\n";*/
+
+    //////////////////////////////////// wskaznik do stalej ////////////////////////////////////
+    /*float zmienna = 3.14;
+    const float * wskaznik = NULL;
+    wskaznik = &zmienna;
+    cout<<*wskaznik<<"\n";
+    cout<<wskaznik<<"\n";
+    cout<<zmienna<<"\n";
+    cout<<&zmienna<<"\n\n";
+    //*wskaznik = 8.2; -> nic z tego
+    zmienna = 2.1;
+    cout<<*wskaznik<<"\n";
+    cout<<wskaznik<<"\n";
+    cout<<zmienna<<"\n";
+    cout<<&zmienna<<"\n";*/
+
+    //////////////////////////////////// wskaznik na tablice ////////////////////////////////////
+    /*int tablica[10]; //dziesiecioelementowa tablica intow
+    tablica[0] = 2;
+    tablica[1] = 5;
+    int *wskaznik = tablica;
+    cout<<wskaznik[0]<<"\n";
+    cout<<tablica[0]<<"\n\n";
+    cout<<wskaznik[1]<<"\n";
+    cout<<tablica[1]<<"\n\n";
+    wskaznik[1]=15;
+    cout<<wskaznik[1]<<"\n";;
+    cout<<tablica[1]<<"\n\n";;
+    for(int i=0;i<10;i++)
+    {
+        //wskaznik[i]=i*2;
+        tablica[i]=i+10;
+    }
+    for (int i=0;i<10;i++)
+    {
+        cout<<"tablica["<<i<<"] - >> "<<*(wskaznik++)//tablica[i]+100//<<"\n";
+    }*/
+
+    //////////////////////////////////// wskaznik na funkcje ////////////////////////////////////
+    cout<<"Wynik mnozenia = "<<oblicz(6,10,mnozenie);
+    cout<<"\nWynik dodawania = "<<oblicz(6,10,dodawanie);
+    cout<<"\nWynik mnozenia = "<<obliczBezDefinicji(6,10,mnozenie);
+    cout<<"\nWynik dodawania = "<<obliczBezDefinicji(6,10,dodawanie);
+
+
+    return 0;
+}
+
+
+int dodawanie(int a, int b)
+{
+    return a + b;
+}
+
+int mnozenie(int a, int b)
+{
+    return a * b;
+}
+
+int oblicz(int a, int b, wskaznikNaFunkcje_Oblicz wykonajWskaznik)
+{
+    return wykonajWskaznik(a,b);
+}
+
+int obliczBezDefinicji(int a, int b, int(*wykonajWskaznik_2)(int, int))
+{
+    return wykonajWskaznik_2(a,b);
+}
