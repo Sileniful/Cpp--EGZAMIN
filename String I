@@ -1,0 +1,112 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+//1. Konstruktory – kopiuj¹cy, domniemany, dziedziczenie, obiekty sk³adowe, inicjalizacja tablic obiektami.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// klasa STRING2
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class string2
+{
+protected:
+    int rozmiar;
+    char *wsk;
+public:
+//konstruktor kopiujacy
+string2 (char t[]):rozmiar(strlen(t)),wsk(new char[rozmiar+1])
+{
+   strcpy(wsk,t);
+}
+//konstruktor bazujacy na referencji - dzialamy na oryginale , a nie na kopii
+/*string2 (string2 & oryginal):rozmiar(oryginal.rozmiar),wsk(new char[rozmiar+1])
+{
+strcpy(wsk,oryginal.wsk);
+}*/
+//konstruktor domniemany
+string2 ():rozmiar(strlen("")),wsk(new char[rozmiar+1])
+{
+    strcpy(wsk,"");
+}
+
+
+
+//wypisanie tekstu
+void wypisz()
+{
+    cout << "Wypisuje:" << wsk << endl;
+}
+
+//destruktor
+/* Wirtualne destruktory należy stosować w klasach bazowych, które mogą być dziedziczone przez inne klasy.
+Destruktor wirtualny w klasie bazowej zapewnia wywołanie wszystkich destruktorów klas potomnych podczas niszczenia obiektu.
+Należy pamiętać, że ideą destruktorów jest zwalnianie zasobów, które zostały przydzielone w czasie pracy z obiektem.
+Niewywołanie destruktora może prowadzić więc do wycieków pamięci, a w konsekwencji do krytycznego błędu pisanej aplikacji.
+Słowo kluczowe virtual przy destruktorze klasy bazowej zapewnia wywołanie wszystkich destruktorów klas pochodnych,
+które dziedziczą po danej klasie bazowej. */
+virtual ~string2()
+{
+    cout << "NISZCZARKA1" << endl;
+    delete wsk;
+}
+
+};
+
+class string3:public string2
+{
+private:
+    char *autor;
+public:
+    string3(char t[],char autor_podany[]):string2(t),autor(new char[strlen(autor_podany+1)])
+    {
+        strcpy(autor,autor_podany);
+    }
+
+    string3 (string3 &oryginal):string2(oryginal.wsk),autor(new char[strlen(oryginal.autor+1)])
+    {
+
+        strcpy(autor,oryginal.autor);
+    }
+    void wypisz()
+    {
+        cout << "Wypisuje:" << wsk << " autorstwa " << autor << endl;
+    }
+    ~string3()
+    {
+        cout << "NISZCZARKA2" << endl;
+        delete autor;
+    }
+    void wypiszRozmiar()
+    {
+        cout << rozmiar <<endl;
+    }
+
+};
+
+
+
+int main()
+{
+    //ten zadziala przy konstruktorze kopiujacym
+    string2 tekst1 = "LOL";
+    string2 tekst2 = tekst1;
+    tekst2.wypisz();
+
+    //ten zadziala przy konstruktorze z referenji:
+    //string2 tekst1("LOL");
+
+    //konstruktor domniemany:
+    string2 tekst3;
+    tekst3.wypisz();
+
+    string3 tekst4("Tekst","kuba");
+    tekst4.wypisz();
+    string3 tekst5(tekst4);
+    tekst5.wypisz();
+
+    // tablica obiektow:
+    string3 Tablica[2]={{"Tekst1","Kuba"},{"Tekst2","Romek"}};
+    Tablica[1].wypisz();
+    Tablica[1].wypiszRozmiar();
+    return 0;
+}
