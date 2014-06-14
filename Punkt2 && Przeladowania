@@ -1,0 +1,258 @@
+#include <iostream>
+
+using namespace std;
+//3. Zmienne i funkcje statyczne
+/*5. Prze³adowanie operatorów:
++, -, * , /
++=, *=, itp.
+++, --
+New , delete
+[], (), ->
+<<, >>*/
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// KLASA PUNKT
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/* Statyczne zmienne i metody w klasach to inaczej sk³adowe, które s¹ powi¹zane z klas¹, a nie z obiektem.
+Statyczne mog¹ byæ dane i metody. W przypadku danych, przez ca³y czas pracy programu,
+istnieje tylko jeden egzemplarz ka¿dego pola. Metody statyczne nie maj¹ dostêpu do niestatycznych metod i zmiennych.*/
+class Punkt
+{
+private:
+    float x;
+    float y;
+    static int ilosc_punktow;
+
+
+public:
+  //konstruktor domniemany:
+    Punkt(float x_d=0,float y_d=0):x(x_d),y(y_d)
+    {
+        ilosc_punktow++;
+    }
+  // kopiujacy:
+    Punkt(const Punkt & oryginal):x(oryginal.x),y(oryginal.y) { ilosc_punktow++;}
+
+    static int wypiszIlosc()
+    {
+        cout << ilosc_punktow << endl;
+    }
+    // WYPISANIE
+    void wypisz()
+    {
+        cout << "X: " << x << " Y: " << y <<endl;
+    }
+
+
+
+    // PRZELADOWYWANIE OPERATOROW
+
+
+    Punkt & operator= (const Punkt & oryginal)
+    {
+        x = oryginal.x;
+        y = oryginal.y;
+       return *this;
+    }
+
+    Punkt & operator+ (const Punkt & oryginal)
+    {
+        x = x+oryginal.x;
+        y = y+oryginal.y;
+        return *this;
+    }
+
+     Punkt & operator- (const Punkt & oryginal)
+    {
+        x = x-oryginal.x;
+        y = y-oryginal.y;
+        return *this;
+    }
+     Punkt & operator* (const Punkt & oryginal)
+    {
+        x = x*oryginal.x;
+        y = y*oryginal.y;
+        return *this;
+    }
+    Punkt & operator/ (const Punkt & oryginal)
+    {
+        x = x/oryginal.x;
+        y = y/oryginal.y;
+        return *this;
+    }
+    Punkt & operator+= (const Punkt & oryginal)
+    {
+        x = x+=oryginal.x;
+        y = y+=oryginal.y;
+        return *this;
+    }
+    Punkt & operator*= (const Punkt & oryginal)
+    {
+        x = x*=oryginal.x;
+        y = y*=oryginal.y;
+        return *this;
+    }
+
+
+    //dwa razy operator ++ dlatego ze
+    // operator ++ moze byc taki:
+    // ++punkt
+    // lub
+    // punkt++
+    //i to ma znaczenie
+    Punkt & operator++ () // ++punkt
+    {
+        x++;
+        y++;
+        return *this;
+    }
+
+   Punkt & operator++(int) // punkt++
+    {
+        Punkt temp = *this ;
+        x++;
+        y++;
+        return temp ;
+    }
+
+
+   Punkt & operator--(int) // punkt++
+    {
+        Punkt temp = *this ;
+        x--;
+        y--;
+        return temp ;
+    }
+    void * operator new(size_t rozmiar)
+    { // s³ówka static nie muszê umieszczaæ, zrobi to za mnie kompilator
+        return (new char[rozmiar]); // zawarte tutaj new skorzysta z GLOBALNEGO (dla wszystkiego tworzonego za jego pomoc¹) operatora new
+    }
+
+    void operator delete(void* wsk)
+     {
+      delete wsk;
+    }
+    int operator() (Punkt & org) {
+        return (org.x);
+    }
+
+    friend ostream& operator << (ostream & wyjscie, const Punkt & oryginal)
+    {
+        return wyjscie << "X: " << oryginal.x << " Y: " << oryginal.y << endl;
+    }
+    friend istream& operator >> (istream & wyjscie, Punkt & oryginal) // brak consta , wartosc jest zmieniania
+    {
+        cout << "PODAJ WSPOLRZEDNE" << endl;
+        wyjscie >> oryginal.x >> oryginal.y;
+        return wyjscie;
+    }
+
+
+
+
+    float dajX()
+    {
+        return x;
+    }
+    float dajY()
+    {
+        return y;
+    }
+      //operator []
+   /* int &operator[](int i)
+{
+return arr[i];
+}*/
+
+
+
+
+    //destruktor
+    ~Punkt()
+    {
+        ilosc_punktow--;
+    }
+
+
+
+
+};
+
+
+
+
+
+// deklaracja pola static musi byc po za klasa:
+// wczesniej musi byc int , bledem bedzie: Punkt::ilosc_punktow=0; */
+int Punkt::ilosc_punktow=0;
+
+int main()
+{
+    Punkt punkt1(1,2);
+    Punkt punkt2(punkt1);
+
+
+
+    //dzialanie operatora =
+    Punkt punkt3(2,2);
+    punkt3.wypisz();
+    punkt3 = punkt2;
+    punkt3.wypisz();
+
+    //dzialanie operatora+
+    punkt2=punkt2+punkt1; // X:2 , Y:4
+    punkt2.wypisz();
+
+    //dzialanie operatora+
+    punkt2=punkt2-punkt1; // X:1, Y:2
+    punkt2.wypisz();
+
+    //dzialanie operatora+
+    punkt2=punkt2*punkt1; // X:1, Y:4
+    punkt2.wypisz();
+
+    //dzialanie operatora/
+    punkt2=punkt2/punkt1; // X:1, Y:2
+    punkt2.wypisz();
+
+    //dzialanie operatora+=
+    punkt2=punkt2+=punkt1; // X:2, Y:4
+    punkt2.wypisz();
+
+    //dzialanie operatora+=
+    punkt2=punkt2*=punkt1; // X:2, Y:8
+    punkt2.wypisz();
+
+    //dzialanie operatora++
+    punkt2++;
+    punkt2.wypisz();
+
+    //dzialanie operatora--
+    punkt2--;
+    punkt2.wypisz();
+
+    //dzialanie operatora new
+    //jest on statyczny zawsze
+
+    Punkt::operator new (222);
+
+    //dzialanie operatora delete
+    //jest on statyczny zawsze
+    Punkt *wsk;
+    Punkt::operator delete(wsk);
+
+    //operator ()
+    cout << punkt2(punkt1) << endl;
+
+    //operator <<
+    cout << "PUNKT TO:" << punkt1;
+
+    //operator >> strumien wejscia
+    cin >> punkt1;
+    punkt1.wypisz();
+
+    //metoda statyczna odwolanie sie do niej
+    Punkt::wypiszIlosc();
+        return 0;
+}
