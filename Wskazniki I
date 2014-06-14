@@ -1,0 +1,88 @@
+#include <iostream>
+
+using namespace std;
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///WSKAZNIKI
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void Rzutowanie();
+void Skladowe();
+
+//zeby wskaznik do skladowych dzialal to skladowe musza byc publiczne , inaczej nie dziala
+
+class LiczbyZespolone
+{
+public:
+    float re;
+    float im;
+    float *wskaznik;
+public:
+    LiczbyZespolone(float re_podany=0,float im_podany=0):re(re_podany),im(im_podany) {}
+    LiczbyZespolone(const LiczbyZespolone & oryginal):re(oryginal.re),im(oryginal.im) {}
+void wypisz()
+{
+    cout << "Liczba zespolona to : " << re << " | " << im << endl;
+}
+float dodajDoRe(float cododac)
+{
+    return re+cododac;
+}
+
+float dodajDoIm(float cododac)
+{
+    return im+cododac;
+}
+
+};
+
+
+
+int main()
+{
+    Rzutowanie();
+    Skladowe();
+    return 0;
+}
+
+void Rzutowanie()
+{
+     void *wsk1;
+     float *wsk2;
+     int *wsk3;
+
+     wsk2 = (float *) wsk3;
+     wsk3 = (int *) wsk2;
+     wsk1 = wsk2;
+     wsk1 = wsk3;
+
+    // blad: wsk3 = wsk1; nie mozna z void -> na float/int
+}
+
+void Skladowe()
+{
+    // BUDOWA WSKAZNIKA DO SKLADOWYCH KLASY
+    // <typ elementu klasy> <nazwa klasy>::*<nazwa wskaznika>
+    float LiczbyZespolone::*wsk;
+    wsk = &LiczbyZespolone::re;
+
+    LiczbyZespolone obiekt(2,2);
+    cout << obiekt.*wsk << endl;
+
+    LiczbyZespolone *wskaznikDoKlasy;
+    wskaznikDoKlasy = & obiekt;
+    cout << wskaznikDoKlasy->*wsk << endl;
+
+
+
+/*Uwaga: nie można pokazywać na składniki nie publiczne.
+nie można pokazac na coś co nie posiada nazwy. Na tablice można na jej np. piąty element nie, bo nie posiada nazwy*/
+
+//wskaznik do skladowych metod klasy
+//pozwala wskazac na metode z klasy
+//nalezy uwazac na nawiasy!
+
+    float (LiczbyZespolone::*wf) (float);
+    wf = &LiczbyZespolone::dodajDoRe;
+    cout << (obiekt.*wf)(5) << endl;
+}
