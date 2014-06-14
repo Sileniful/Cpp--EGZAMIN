@@ -1,0 +1,49 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+class A
+{
+public:
+A(){cout<<"AD\n";};	//kontruktor domniemany
+A(int){cout<<"A\n";}	//zwyk³y
+
+};
+
+class B1: public virtual A
+{
+public:
+B1():A(4){cout<<"B1\n";}
+};
+
+class B2: public virtual A
+{
+public:
+B2():A(4){cout<<"B2\n";};
+};
+
+class C:public B1, public B2
+{
+public:
+C():A(6),B2()
+{cout<<"C\n";};
+};
+
+class D: public virtual A,public C
+{
+public:
+D():A(5),C()
+{cout<<"D\n";};
+};
+
+
+int main()
+{
+{
+D x;cout<<"\n\n\n";
+}
+C y;
+// cout<<x;
+getch();
+return 0;
+}
