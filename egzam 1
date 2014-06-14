@@ -1,0 +1,52 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+class X
+{
+protected:
+int a;	////1
+public:
+
+// virtual X f(void);
+X f1(void);
+void wypisz(){cout<< "X"<<endl;}
+
+X(){};
+X(double);
+}x,*px;
+
+class Y:public X	////1 class Y:private X
+{
+
+public:
+using X::a;	////1
+//virtual f(void);
+Y f1(void);
+void wypisz()
+{cout<< "Y"<<endl;}
+Y();
+
+}y,*py;
+
+
+
+//deklaracja
+Y Obiekt1;
+
+int main()
+{
+// x=y;
+// px=py;
+//y=x;
+//py=px;
+
+Obiekt1.wypisz();
+Obiekt1.X::wypisz();
+Obiekt1.a=5;
+cout<<Obiekt1.a;
+
+getch();
+return 0;
+
+}
