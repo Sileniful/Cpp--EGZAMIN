@@ -1,0 +1,127 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////ZESTAW 4 EGZAMIN CPP //////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+void zad1();
+void zad2();
+void zad3();
+
+int main()
+{
+
+    zad1();
+    zad2();
+    zad3();
+    return 0;
+}
+
+void fun(void)
+{
+
+}
+void zad1()
+{
+/* 1. Napisz nastêpuj¹ce deklaracje:
+sta³y wskaŸnik do liczby ca³kowitej,
+wskaŸnik do tablicy siedmioelementowej wskaŸników do funkcji void fun(void). */
+
+const int *wsk;
+void (*wf[7])(void);
+for (int i=0;i<7;i++)
+{
+    wf[i]=&fun;
+}
+
+};
+
+class wektor {
+private:
+
+    int *x, *y, *z;
+public:
+    wektor(int a,int b,int c)
+    {
+        x = new int;
+        y = new int;
+        z = new int;
+        *x=a;
+        *y=b;
+        *z=c;
+    }
+    friend ostream & operator<< (ostream &wyjscie,const wektor & oryginal)
+    {
+        wyjscie << oryginal.x << oryginal.y << oryginal.z << endl;
+        return wyjscie;
+    }
+    wektor & operator+= (wektor & org)
+    {
+        * x += *org.x;
+        * y += *org.y;
+        * z += *org.z;
+        return *this;
+    }
+    ~wektor()
+    {
+        delete x,y,z;
+    }
+ };
+
+void zad2()
+{
+/* Niech bêdzie dana klasa wektor zdefiniowana:
+class wektor {
+int *x, *y, *z;
+public:
+wektor ... }
+Napisaæ:
+Funkcjê operatorow¹ << wypisuj¹c¹ wektor w postaci [ x y z] np. [3 3 6]
+Funkcjê operatorow¹ += sk³adow¹ umo¿liwiaj¹c¹ dodanie wspó³rzêdnych poszczególnych wektorów: x1+x2, y1+y2, z1+z2*/
+
+wektor a(1,2,3);
+wektor b(1,2,4);
+a +=b;
+
+}
+
+class A
+{
+public:
+    A ()
+    {
+        cout << "KONSTRUKTOR A"<<endl;
+    }
+    ~A ()
+    {
+        cout << "DESTRUKTOR A"<<endl;
+    }
+};
+
+class B:public A
+{
+    public:
+    B()
+    {
+        cout << "KONSTRUKTOR B"<<endl;
+    }
+    ~B ()
+    {
+        cout << "DESTRUKTOR B"<<endl;
+    }
+};
+
+void zad3()
+{
+/* 3. Kolejnoœæ wywo³ywania konstruktorów i destruktorów . Przyk³ad? */
+B obj;
+/*
+Kolejnosc jest taka:
+1.Konstruktor klasy bazowej
+2.Konstruktor klasy pochodnej
+3.Destruktor klasy pochodnej
+4.Destruktor klasy bazowej
+
+*/
+}
