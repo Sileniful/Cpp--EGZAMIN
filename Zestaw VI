@@ -1,0 +1,156 @@
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////ZESTAW 6 EGZAMIN CPP //////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#include <iostream>
+#include <cstring>
+
+using namespace std;
+void zad1();
+void zad2();
+void zad3();
+
+int main()
+{
+
+    zad1();
+    zad2();
+    zad3();
+    return 0;
+}
+
+
+void zad1()
+{
+/*1. Napisz następujące deklaracje:
+stały wskaźnik do stałej znakowej,
+wskaźnik do funkcji składowej klasy wektor wektor wektor:: dodaj(wektor&) */
+
+const char a = 'a';
+const char *wsk;
+wsk = &a;
+
+//wektor (wektor::*wf) (wektor &)
+
+}
+
+class wektor {
+int *x, *y, *z;
+public:
+//friend wektor & operator+(wektor & jeden,wektor &dwa);
+wektor (int a,int b,int c):x(new int),y(new int),z(new int)
+{
+    *x=a;
+    *y=b;
+    *z=c;
+}
+
+wektor (int a)
+{
+    x = new int;
+    y = new int;
+    z = new int;
+    *x = a;
+    *y = a;
+    *z = a;
+
+}
+
+wektor & operator+ (const wektor & org)
+{
+    *x = *x+*(org.x);
+    *y= *y+*(org.y);
+    *z = *z+ *(org.z);
+
+    return *this;
+}
+
+wektor & operator+ (int a)
+{
+    *x = *x+a;
+    *y= *y+a;
+    *z = *z+a;
+
+    return *this;
+}
+
+wektor & operator= (const wektor & org)
+{
+    *x = *(org.x);
+    *y= *(org.y);
+    *z = *(org.z);
+
+    return *this;
+}
+
+operator int ()
+{
+    return *x;
+}
+
+void wypisz()
+{
+    cout << *x << " " << *y << " " << *z << endl;
+}
+~wektor()
+{
+    delete x,y,z;
+}
+};
+
+/*wektor & operator+(const wektor & jeden,const wektor &dwa)
+{
+*(jeden.x) = *(jeden.x)+*(dwa.x);
+*(jeden.y) = *(jeden.y)+*(dwa.y);
+*(jeden.z) = *(jeden.z)+*(dwa.z);
+return jeden;
+}*/
+
+
+
+void zad2()
+{
+/* Niech będzie dana klasa wektor zdefiniowana:
+class wektor {
+int *x, *y, *z;
+public:
+wektor ... }
+Napisać:
+Funkcję operatorową + składową i globalną umożliwiającą dodanie współrzędnych poszczególnych wektorów.
+Funkcje lub konstruktor konwertujący dla poniższych wywołań
+
+w1 = w2+2;
+w1 = 2+w2
+w1 = 2,2 + w1;*/
+
+wektor w1(0,0,0);
+wektor w2(1,2,3);
+w1 = w1 + w2;
+w1 = 2 + w2;
+w1 = w2 + 2;
+w1 = 2,2 + w1;
+w1.wypisz();
+
+}
+
+
+void zad3()
+{
+/* 3. Co to jest funkcja czysto wirtualną, jak ją zadeklarować. Przykład. */
+/*
+Określa to, że metoda z klasy bazowej deklarująca metodę wirtualną nigdy nie powinna się wykonać.
+W efekcie klasa taka staje się klasą abstrakcyjną. Oznacza to tyle, iż nie jest możliwe stworzenie obiektu tej klasy.
+Klasa taka służy jedynie temu, by
+zdefiniować pewnego rodzaju interfejs i jest przeznaczona jedynie po to, by od niej dziedziczyć.
+class Figura
+{
+public:
+virtual float pole() = 0;
+
+Taka deklaracja metody wirtualnej zmusza jednocześnie do określenia metody float pole() na jednym z poziomów dziedziczenia.
+Nie jest możliwe pominięcie takiej implementacji.
+Jednocześnie taka deklaracja uniemożliwia stworzenie jakiegokolwiek obiektu klasy Figura np.: Figura mojObiekt;.
+};
+
+*/
+
+}
