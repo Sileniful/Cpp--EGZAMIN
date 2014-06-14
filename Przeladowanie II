@@ -1,0 +1,282 @@
+#include <conio.h>
+#include<iostream>
+
+using namespace std;
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class tab{
+int tablica[100];
+public:
+
+int & operator[](unsigned int ktory)
+{
+return tablica[ktory];
+}
+
+int tab::operator()(int a,int b ,int c,int d ,int e)
+{
+return a+b+c+d+e;
+}
+
+};
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class l_zes {
+
+float re,im ;
+int tap[5];
+public:
+
+
+int & l_zes::operator[](unsigned int ktory)
+{
+return tap[ktory];
+}
+
+
+l_zes::l_zes (int i=0, int j=0)	:re(i),im(j)
+{
+};
+
+
+//l_zes ( l_zes &c);
+// l_zes l_zes::operator=(const l_zes &);
+
+
+
+// friend l_zes operator+ (const l_zes & a, const l_zes & b);
+l_zes l_zes::operator+ ( const l_zes &b)
+{
+cout<<" + ";
+l_zes suma;
+suma.re=re+b.re;	//i tak wskazuje this na re
+suma.im=this->im+b.im;
+return suma;
+}
+friend l_zes operator- (const l_zes & a, const l_zes & b);
+
+
+friend ostream &operator<<(ostream &e , const l_zes &c );
+friend istream &operator>>(istream &k, l_zes &c);
+
+// friend l_zes operator-(l_zes &a);
+
+ l_zes &operator*(const l_zes &b)
+ {
+cout<<" * ";
+//l_zes wynik;
+re=re*b.re;
+im=im*b.im;
+return (*this);
+ }
+
+ 
+  l_zes l_zes::operator/(const l_zes &b)
+  {
+    cout<<" / ";
+l_zes wynik;
+wynik.re=re/b.re;
+wynik.im=im/b.im;
+  return wynik;
+  }
+
+  l_zes l_zes::operator-( )
+  {
+cout<<" -p ";
+l_zes wynik ;
+wynik.re=-re;
+wynik.im=-this->im;
+return wynik;
+  }
+
+
+ /* l_zes &operator=(const l_zes &b)
+{
+cout<<" = ";
+this->re=b.re;
+im=b.im;
+return *this;
+}*/
+
+
+  l_zes &operator+=(const l_zes &b)
+  {
+cout<<" += ";
+re=re+b.re;
+this->im=this->im+b.im;
+return *this;
+   
+  }
+    l_zes &operator-=(const l_zes &b)
+  {
+cout<<" -= ";
+re=re-b.re;
+this->im=this->im-b.im;
+return *this;
+   }
+
+l_zes &operator*=(const l_zes &b)
+{
+cout<<" *= ";
+this->re=this->re*b.re;
+this->im=this->im*b.im;
+return *this;
+}
+
+l_zes &operator/=(const l_zes &b)
+{
+cout<<" *= ";
+this->re=this->re/b.re;
+this->im=this->im/b.im;
+return *this;
+}
+
+
+l_zes operator++()
+{
+re=this->re+1;
+im=this->im+1;
+return *this;
+}
+
+l_zes operator++(int)
+{
+l_zes kopia(*this);
+this->re=re+1;
+this->im=im+1;
+return kopia;
+
+}
+
+l_zes operator--()
+{
+re=re-1;
+this->im=this->im-1;
+return *this;
+}
+
+l_zes operator--(int)
+{
+l_zes kopia(*this);
+this->re=this->re-1;
+im=im-1;
+return kopia;
+}
+
+
+
+};
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//l_zes operator+(const l_zes &a, const l_zes &b)
+//{
+// l_zes suma;
+// suma.re=a.re+b.re;
+// suma.im=a.im+b.im;
+// return suma;
+//}
+
+l_zes operator-(const l_zes &a,const l_zes &b)
+{
+cout<<" - ";
+l_zes wynik ;
+wynik.re=a.re-b.re;
+wynik.im=a.im-b.im;
+return wynik;
+
+
+}
+
+
+ostream &operator<<(ostream &e ,const l_zes &c )
+{
+cout<<" << ";
+e<<c.re<<", "<<c.im;
+return e;
+}
+
+istream &operator>>(istream &k, l_zes &c)
+{
+cout<<" >> ";
+k>>c.re>>c.im;
+// k>>c.im;
+
+return k;
+}
+
+//l_zes operator-(l_zes &a)
+//{
+// l_zes wynik;
+// wynik.re=-a.re;
+// wynik.im=-a.im;
+// return wynik;
+//
+//}
+
+l_zes a(15,5),b(10,20),x,c,d,e,f,g,h,i,j(2),k(30,10),l,m,n,o,z,tap[5];
+
+
+
+int main()
+{
+//cin>>x;
+a=a;
+c=a.operator+(b);
+d=operator-(a,b);
+e=a.operator*(b);
+f=a/b;
+g=-a;
+h+=a;
+i-=a;
+j*=a;
+k/=a;
+
+cout<<">>\nx\t"<<x<<endl
+<<"a\t"<<a<<endl
+<<"b\t"<<b<<endl
+<<"z\t"<<z<<endl<<endl
+
+<<"+\t"<<c<<endl
+<<"-\t"<<d<<endl
+<<"*\t"<<e<<endl
+<<"/\t"<<f<<endl
+<<"-p\t"<<g<<endl
+<<"+=\t"<<h<<endl
+<<"-=\t"<<i<<endl
+<<"*=\t"<<j<<endl
+<<"/=\t"<<k<<endl;
+cout	<<"l++\t"<<l;	cout<<"\t"<<l++<<"\t"<<l<<endl;
+cout	<<"++m\t"<<m;	cout<<"\t"<<++m<<"\t"<<m<<endl;
+cout	<<"n--\t"<<n;	cout<<"\t"<<n--<<"\t"<<n<<endl;
+cout	<<"--o\t"<<o;	cout<<"\t"<<--o<<"\t"<<o<<endl;
+
+tap[0]=a;
+tap[1]=b;
+tap[2]=c;
+tap[3]=d;
+tap[4]=e;
+
+for(int v=0;v<5;v++)
+cout<<tap[v]<<" ";
+
+
+
+
+cout<<a+b+c+d+e+f+g+h+i+j+k+l+m+n+o;
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+cout<<endl<<endl<<"[]"<<endl<<endl;
+tab t,u;
+for (int i=0;i<10;i++)
+t[i]=i;
+for (int i=0;i<10;i++)
+cout<<t[i]<<" ";
+
+cout<<"\n\n"<<u.operator()(t[1],t[2],t[3],t[4],t[5]);	/// Równowa¿ne
+cout<<"\n"<<u(t[1],t[2],t[3],t[4],t[5]);	/// ^
+getch();
+return 0;
+}
