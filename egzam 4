@@ -1,0 +1,74 @@
+// klasa punkt i pochodne + polimorfizm.cpp : Defines the entry point for the console application.
+//
+
+//#include <stdafx.h>
+#include <iostream>
+#include <stdio.h>
+
+using namespace std;
+
+class punkt {
+protected:
+float x,y;
+
+public:
+punkt(float i=0, float j=0):x(i),y(j) { }
+
+virtual void wspolrzedne() {
+cout << "X: " << x << ", Y: " << y << endl;
+}
+};
+
+
+class kwadrat : public punkt {
+protected:
+float bok1;
+
+public:
+kwadrat(float i=0, float j=0, float k=0):punkt(i,j),bok1(k) { }
+
+virtual void wspolrzedne() {
+cout << "X: " << x << ", Y: " << y << ", Bok: " << bok1 << endl;
+}
+};
+
+class prostokat : public kwadrat {
+protected:
+float bok2;
+
+public:
+prostokat(float i=0, float j=0, float k=0, float l=0):kwadrat(i,j,k),bok2(l) { }
+
+virtual void wspolrzedne() {
+cout << "X: " << x << ", Y: " << y << ", Bok 1: " << bok1 << ", Bok 2: " << bok2 << endl;
+}
+};
+
+class menu {
+public:
+//menu() {}
+
+//void wyswietl_menu() {}
+
+void wspolrzedne_figury(punkt &p) {
+p.wspolrzedne();
+}
+};
+
+int main()
+{
+punkt p1(4,5),p2(2,4);
+kwadrat k1(1,2,3),k2(5,6,7);
+prostokat pr1(8,7,6,5),pr2(5,6,7,8),pr3;
+
+menu menu_glowne;
+menu_glowne.wspolrzedne_figury(p1);
+menu_glowne.wspolrzedne_figury(p2);
+menu_glowne.wspolrzedne_figury(k1);
+menu_glowne.wspolrzedne_figury(k2);
+menu_glowne.wspolrzedne_figury(pr1);
+menu_glowne.wspolrzedne_figury(pr2);
+menu_glowne.wspolrzedne_figury(pr3);
+system("PAUSE");
+return 0;
+}
